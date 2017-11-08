@@ -1,0 +1,14 @@
+{
+    "description": "Data from the Runner regarding a testRun.",
+    "type": "object",
+    "properties": {
+        "startTime": {
+            "type": "integer",
+            "description": "A Date.now(); value"
+        },
+        "endTime": {
+            "type": "integer",
+            "description": "A Date.now(); value"
+        }
+    }
+}

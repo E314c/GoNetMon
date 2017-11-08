@@ -1,0 +1,113 @@
+{
+    "type":"object",
+    "properties": {
+        "Tests": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/module"
+            }
+        },
+        "Runners": {
+            "type": "array",
+            "items": {
+                "allOf":[
+                    {"$ref": "#/definitions/module"},
+                    {
+                        "type": "object",
+                        "properties": {
+                            "runs": {
+                                "type": "string",
+                                "description": "InstanceId of the test to be run"
+                            }
+                        },
+                        "required": ["runs"]
+                    }
+
+                ]
+            }
+        },
+        "Loggers": {
+            "type": "array",
+            "items": {
+                "allOf":[
+                    {"$ref": "#/definitions/module"},
+                    {
+                        "type": "object",
+                        "properties": {
+                            "options": {"$ref": "#/definitions/listenerOptions"}
+                        },
+                        "required": ["options"]
+                    }
+                ]
+            }
+        }
+    },
+    "required": [
+        "Tests",
+        "Runners",
+        "Loggers"
+    ],
+    "additionalProperties": false,
+    "definitions": {
+        "module": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "description": "Id for the instance"
+                },
+                "type": {
+                    "type": "string",
+                    "description": "the class of type module to load."
+                },
+                "options": {
+                    "type": "object",
+                    "description": "configuration object for the instance"
+                }
+            },
+            "required": [
+                "type"
+            ]
+        },
+        "listenerOptions": {
+            "type":"object",
+            "properties": {
+                "listensTo": {
+                    "oneOf": [
+                        {
+                            "enum": ["all", "fail", "pass"],
+                            "description": "options to listen to all test results, all failure or all passes."
+                        },
+                        {
+                            "type": "array",
+                            "items": {
+                                "oneOf": [
+                                    {
+                                        "type": "string",
+                                        "description": "name of test instance to listen for. (listens to all results from given test)"
+                                    },
+                                    {
+                                        "type": "object",
+                                        "properpties": {
+                                            "test": {
+                                                "type": "string",
+                                                "description": "name of test instance to listen for"
+                                            },
+                                            "condition": {
+                                                "type": "string",
+                                                "enum": ["all", "fail", "pass"]
+                                            }
+                                        },
+                                        "required": ["test", "condition"]
+                                    }
+                                ]
+                            },
+                            "minItems": 1
+                        }
+                    ]
+                }
+            },
+            "required": ["listensTo"]
+        }
+    }
+}

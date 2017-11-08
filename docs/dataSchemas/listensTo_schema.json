@@ -1,0 +1,34 @@
+{
+    "oneOf": [
+        {
+            "enum": ["all", "fail", "pass"],
+            "description": "options to listen to all test results, all failure or all passes."
+        },
+        {
+            "type": "array",
+            "items": {
+                "oneOf": [
+                    {
+                        "type": "string",
+                        "description": "name of test instance to listen for. (listens to all results from given test)"
+                    },
+                    {
+                        "type": "object",
+                        "properpties": {
+                            "test": {
+                                "type": "string",
+                                "description": "name of test instance to listen for"
+                            },
+                            "condition": {
+                                "type": "string",
+                                "enum": ["all", "fail", "pass"]
+                            }
+                        },
+                        "required": ["test", "condition"]
+                    }
+                ]
+            },
+            "minItems": 1
+        }
+    ]
+}

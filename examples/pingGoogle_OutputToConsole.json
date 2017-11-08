@@ -1,0 +1,31 @@
+{
+    "Tests": [
+        {
+            "id": "pingGoogle",
+            "type": "HttpPing",
+            "options": {
+                "url": "google.com"
+            }
+        }
+    ],
+    "Runners": [
+        {
+            "id": "pingRunner",
+            "type": "TimedIntervalRunner",
+            "runs": "pingGoogle",
+            "options": {
+                "interval": 3000
+            }
+        }
+    ],
+    "Loggers": [
+        {
+            "type": "ConsoleLogger",
+            "options": {
+                "listensTo": [
+                    "pingGoogle"
+                ]
+            }
+        }
+    ]
+}
