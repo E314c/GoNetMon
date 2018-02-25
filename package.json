@@ -18,6 +18,7 @@
   },
   "dependencies": {
     "ajv": "^5.3.0",
+    "mongodb": "^3.0.3",
     "yargs": "^10.1.1"
   }
 }

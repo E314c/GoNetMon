@@ -21,7 +21,7 @@ so you can get back to being the very best!
   - [ ] Run when other test pass/fail
 - Data Logging
   - [x] Print results to console
-  - [ ] Be able to access/view historic results of tests
+  - [x] Be able to access/view historic results of tests
   - [ ] Be able to view real-time data.
   - [ ] Web app to display nice graphs.
   - [ ] graph image generation to local files

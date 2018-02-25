@@ -23,4 +23,7 @@ All logger instances should implement the following common options for configuri
     ]
 }
 ```
-For this reason, it is recommended that your `.getOptionSchema()` override expands the schema given by the method on the base Logger class. 
+For this reason, it is recommended that your `.getOptionSchema()` override expands the schema given by the method on the base Logger class.
+
+### .logTestResults(<testId>, <passed>, [runnerData], [testData])
+Each call to `logTestResults` will contain, at the minimum, the ID of the test instance that triggered the event and a boolean of whether it passed or failed. After that there may be objects which represent extra data provided by the runner and test instances.
