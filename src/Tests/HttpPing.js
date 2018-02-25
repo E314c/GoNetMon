@@ -2,6 +2,13 @@ const Test = require('../baseClasses/Test');
 const http = require('http');
 
 class HttpPing extends Test {
+
+    constructor(testOptions, testInstanceId){
+        super(testOptions, testInstanceId);
+
+        this.maxPing = testOptions.maxPing;
+    }
+
     test(){
         const self = this;
         return new Promise((resolve, reject) => {
@@ -16,6 +23,14 @@ class HttpPing extends Test {
                 resolve(Date.now() - start);
                 pingRequest.abort();
             });
+
+            //Add timeout if specified.
+            if(this.maxPing){
+                pingRequest.setTimeout(this.maxPing, () => {
+                    reject(`Ping >${this.maxPing}`);
+                    pingRequest.abort();
+                });
+            }
 
             pingRequest.on("error", () => {
                 reject(-1);
@@ -38,6 +53,10 @@ class HttpPing extends Test {
                     type: 'integer',
                     minimum: 0,
                     maximum: 65535
+                },
+                maxPing: {
+                    type: 'integer',
+                    description: 'How long ping should wait before deciding '
                 }
             },
             required: ['url']

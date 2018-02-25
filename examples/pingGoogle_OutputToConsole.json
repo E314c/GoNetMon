@@ -4,7 +4,8 @@
             "id": "pingGoogle",
             "type": "HttpPing",
             "options": {
-                "url": "google.com"
+                "url": "google.com",
+                "maxPing": 500
             }
         }
     ],
