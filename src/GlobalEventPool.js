@@ -90,7 +90,7 @@ function addTestEventListener(listenerFunction, listenerOptions, listenerId){
 
     //Add the listener to the listenerMap
     if (listenerMap[listenerId]){
-        console.warn(`Listener instance '${listenerId}' was already registered, but will be re-registered`);
+        console.warn(`Listener instance '${listenerId}' was already registered, but will be re-registered`);    //eslint-disable-line no-console
     }
 
     listenerMap[listenerId] = listenerFunction;

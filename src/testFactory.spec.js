@@ -12,8 +12,8 @@ const testFactory = proxyquire('./testFactory', {
 
 describe('testFactory', () => {
     it('has the expected pre-loaded Test classes', () => {
-        const expectedModules =['HttpPing'];
-        expect(testFactory.getModuleList()).to.deep.equal(expectedModules);
+        const expectedModules =['HttpPing', 'DnsResolve'];
+        expect(testFactory.getModuleList()).to.have.members(expectedModules);
     });
 
     describe('getModuleInstance()', () => {

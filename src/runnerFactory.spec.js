@@ -19,7 +19,7 @@ const runnerFactory = proxyquire('./runnerFactory', {
 describe('runnerFactory', () => {
     it('has the expected pre-loaded Test classes', () => {
         const expectedModules =['TimedIntervalRunner'];
-        expect(runnerFactory.getModuleList()).to.deep.equal(expectedModules);
+        expect(runnerFactory.getModuleList()).to.have.members(expectedModules);
     });
     describe('getModuleInstance()', () => {
         it.skip('wraps the super.getModuleInstance() method to inject globalEventPool.emitTestEvent() to module creation', () => {

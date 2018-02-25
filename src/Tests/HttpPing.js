@@ -3,12 +3,6 @@ const http = require('http');
 
 class HttpPing extends Test {
 
-    constructor(testOptions, testInstanceId){
-        super(testOptions, testInstanceId);
-
-        this.maxPing = testOptions.maxPing;
-    }
-
     test(){
         const self = this;
         return new Promise((resolve, reject) => {
@@ -25,9 +19,9 @@ class HttpPing extends Test {
             });
 
             //Add timeout if specified.
-            if(this.maxPing){
-                pingRequest.setTimeout(this.maxPing, () => {
-                    reject(`Ping >${this.maxPing}`);
+            if(self.options.maxPing){
+                pingRequest.setTimeout(self.options.maxPing, () => {
+                    reject(`Ping >${self.options.maxPing}`);
                     pingRequest.abort();
                 });
             }
@@ -56,7 +50,7 @@ class HttpPing extends Test {
                 },
                 maxPing: {
                     type: 'integer',
-                    description: 'How long ping should wait before deciding '
+                    description: 'Set up limit on ping timeout'
                 }
             },
             required: ['url']

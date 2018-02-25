@@ -16,8 +16,8 @@ const loggerFactory = proxyquire('./loggerFactory', {
 
 describe('loggerFactory', () => {
     it('has the expected pre-loaded constructs:', () => {
-        const expectedLoggers =['ConsoleLogger'];
-        expect(loggerFactory.getModuleList()).to.deep.equal(expectedLoggers);
+        const expectedLoggers =['ConsoleLogger', 'MongoLogger'];
+        expect(loggerFactory.getModuleList()).to.have.members(expectedLoggers);
     });
 
     describe('getModuleInstance()', () => {
