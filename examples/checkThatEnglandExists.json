@@ -1,10 +1,24 @@
 {
     "Tests": [
         {
-            "id": "pingGoogle",
+            "id": "pingUkGov",
             "type": "HttpPing",
             "options": {
-                "url": "google.com",
+                "url": "www.gov.uk"
+            }
+        },
+        {
+            "id": "pingBBC",
+            "type": "HttpPing",
+            "options": {
+                "url": "bbc.co.uk"
+            }
+        },
+        {
+            "id": "pingGuardian",
+            "type": "HttpPing",
+            "options": {
+                "url": "www.theguardian.com",
                 "maxPing": 500
             }
         }
@@ -13,7 +27,7 @@
         {
             "id": "pingRunner",
             "type": "TimedIntervalRunner",
-            "runs": ["pingGoogle"],
+            "runs": ["pingUkGov", "pingBBC", "pingGuardian"],
             "options": {
                 "interval": 3000
             }
@@ -23,9 +37,7 @@
         {
             "type": "ConsoleLogger",
             "options": {
-                "listensTo": [
-                    "pingGoogle"
-                ],
+                "listensTo": "all",
                 "pretty": true,
                 "extraData": false
             }

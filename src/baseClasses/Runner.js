@@ -2,18 +2,24 @@ const Module = require('./Module');
 const TestBaseClass = require('./Test');
 
 class Runner extends Module {
-    constructor (runnerOptions, instanceId, postTestResult, testClassInstance){
+    constructor (runnerOptions, instanceId, postTestResult, testClassInstances){
         super(runnerOptions, instanceId);
+
         //check required args:
-        if (!(postTestResult && typeof postTestResult === 'function') ||
-            !(testClassInstance && (testClassInstance instanceof TestBaseClass))
-        ){
-            throw new TypeError(`Instance of Runner must be given a function 'postTestResults' and a instance of a test class, saw '${postTestResult}' and '${testClassInstance}' respectively.`);
+        if (!(postTestResult && typeof postTestResult === 'function')) {
+            throw new TypeError(`Instance of Runner must be given a function 'postTestResults', saw '${postTestResult}'`);
+        }
+        // Check testClassInstances:
+        if (!(testClassInstances
+            && testClassInstances instanceof Array
+            && testClassInstances.every(x => (x instanceof TestBaseClass))
+        )) {
+            throw new TypeError(`Instances of Runner must be given an Array of TestClassInstances to run. Got a '${testClassInstances.constructor.name}'`);
         }
 
         //Store construction values:
         this.postTestResult = postTestResult;
-        this.testClassInstance = testClassInstance;
+        this.testClassInstances = testClassInstances;
 
         //bind class methods
         this.start = this.start.bind(this);

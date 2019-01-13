@@ -12,7 +12,7 @@
         {
             "id": "pingRunner",
             "type": "TimedIntervalRunner",
-            "runs": "pingGoogle",
+            "runs": ["pingGoogle"],
             "options": {
                 "interval": 3000
             }

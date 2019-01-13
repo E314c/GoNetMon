@@ -77,7 +77,7 @@ describe('ModuleFactory', () => {
                     return ++x;
                 };
                 const fakeTestClassInstance = new (require(path.resolve(TEST_MODULE_DIRECTORY, './testModule')))();
-                const createdTest = uut.getModuleInstance('TestRunnerModule', givenOptions, givenId, fakePostTestResultFunction, fakeTestClassInstance);
+                const createdTest = uut.getModuleInstance('TestRunnerModule', givenOptions, givenId, fakePostTestResultFunction, [fakeTestClassInstance]);
                 expect(createdTest).to.be.instanceOf(require(path.resolve(TEST_MODULE_DIRECTORY, './testRunnerModule')));
                 expect(createdTest.instanceId).to.equal(givenId);
                 expect(createdTest.options).to.deep.equal(givenOptions);

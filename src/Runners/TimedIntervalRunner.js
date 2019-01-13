@@ -3,16 +3,23 @@ const RunnerBase = require('../baseClasses/Runner');
 class TimedIntervalRunner extends RunnerBase {
     start(){
         const self = this;
+
+        // Create interval
         self.timerInterval = setInterval(() => {
-            const runnerData = {
-                startTime: new Date()
-            };
-            self.testClassInstance.test().then((passData) => {
-                runnerData.endTime = new Date();
-                self.postTestResult(self.testClassInstance.instanceId, true, runnerData, passData);
-            }).catch((failData) => {
-                runnerData.endTime = new Date();
-                self.postTestResult(self.testClassInstance.instanceId, false, runnerData, failData);
+
+            // Run each assigned testInstance:
+            self.testClassInstances.forEach(testClassInstance => {
+                const runnerData = {
+                    startTime: new Date()
+                };
+                // Run test:
+                testClassInstance.test().then((passData) => {
+                    runnerData.endTime = new Date();
+                    self.postTestResult(testClassInstance.instanceId, true, runnerData, passData);
+                }).catch((failData) => {
+                    runnerData.endTime = new Date();
+                    self.postTestResult(testClassInstance.instanceId, false, runnerData, failData);
+                });
             });
         }, self.options.interval);
     }

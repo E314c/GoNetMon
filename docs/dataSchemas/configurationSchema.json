@@ -16,8 +16,11 @@
                         "type": "object",
                         "properties": {
                             "runs": {
-                                "type": "string",
-                                "description": "InstanceId of the test to be run"
+                                "type": "array",
+                                "items": {
+                                    "type": "string",
+                                    "description": "InstanceId of the test to be run"
+                                }
                             }
                         },
                         "required": ["runs"]

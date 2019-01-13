@@ -4,10 +4,15 @@ const Module = require('./Module');
 const {randomAlphaNumeric} = require('../util');
 const ajv = new (require('ajv'))({
     allErrors: true,
-    jsonPointers: true
+    jsonPointers: true,
+    verbose: true
 });
 
 class ModuleFactory {
+
+    /**
+     * @param {string} initalModuleDirectory the directory to load
+     */
     constructor(initalModuleDirectory){
         this.availableClasses= {};  //initialise avaiableClasses to blank object
         initalModuleDirectory = path.resolve(process.cwd(), initalModuleDirectory); //safety first kids!
@@ -41,6 +46,9 @@ class ModuleFactory {
         this.availableClasses[className] = newModule;
     }
 
+    /**
+     * @returns {Array.<string>} Available class names
+     */
     getModuleList(){
         return Object.keys(this.availableClasses);
     }

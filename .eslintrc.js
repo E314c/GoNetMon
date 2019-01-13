@@ -3,6 +3,12 @@ module.exports = {
         "es6": true,
         "node": true
     },
+    "parserOptions": {
+        ecmaVersion: 7,
+        ecmaFeatures: {
+            experimentalObjectRestSpread: true
+        }
+    },
     "extends": "eslint:recommended",
     "rules": {
         "array-bracket-newline": [
@@ -49,7 +55,7 @@ module.exports = {
         "no-multiple-empty-lines": ["error", {max:1, maxEOF:1}],
         "no-var": "error",
         "no-warning-comments": "warn",
-        "operator-linebreak": "error",
+        "operator-linebreak": ["error", "before"],
         "prefer-const": "error",
         "semi": "error",
         "semi-spacing": "error",

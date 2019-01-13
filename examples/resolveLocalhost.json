@@ -12,7 +12,7 @@
     "Runners": [
         {
             "type": "TimedIntervalRunner",
-            "runs": "resolveLocalHost",
+            "runs": ["resolveLocalHost"],
             "options": {
                 "interval": 5000
             }
